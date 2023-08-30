@@ -1,0 +1,50 @@
+Question: How is the communication between the host and the graphic card handled?
+clCreateBuffer & clSetKernelArg functions are used pass data between card and host
+
+Question: What function executes your kernel?
+clEnqueueNDRangeKernel
+
+Question: How does the kernel know what element to work on?
+clSetKernelArg -> a,b,c recognised by patterns and get_global_id(0) used to get thread id
+
+QUESTION: What timing did you get for your GPU reduction? Compare it to the CPU version.
+
+CPU 0.000007
+GPU reduction.
+GPU 0.000979
+
+QUESTION: Try larger data size. On what size does the GPU version get faster, or at least comparable, to the CPU?
+
+33554432
+CPU 0.056660
+GPU reduction.
+GPU 0.055731
+
+QUESTION: How can you optimize this further? You should know at least one way.
+Pyramid
+
+QUESTION: Should each thread produce one output or two? Why?
+No half of the threads never work and this decreases.
+
+QUESTION: How many items can you handle in one workgroup?
+1024
+
+QUESTION: What problem must be solved when you use more than one workgroup? How did you solve it?
+We did not encounter that issue what is your insight.
+
+QUESTION: What time do you get? Difference to the CPU? What is the break even size? What can you expect for a parallel CPU version? (Your conclusions here may vary between the labs.)
+CPU sorting.
+CPU 0.008140
+GPU sorting.
+GPU 0.101178
+
+#define kDataLength 32*2048
+CPU sorting.
+CPU 0.041362
+GPU sorting.
+GPU 0.395749
+
+Number of threads is contant. So, does not scale but more power efficent.
+
+
+
